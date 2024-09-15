@@ -94,6 +94,8 @@ export async function GET() {
                 background-color: white;
                 border-radius: 8px;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                max-width: 800px;
+                width: 100%;
             }
             h1 {
                 color: #333;
@@ -140,7 +142,8 @@ export async function GET() {
     <body>
         <div class="container">
             <h1>Hello from ${process.env.VERCEL_REGION}</h1>
-            <p>This page is served from a Vercel serverless function.</p>
+            <p>This page is served from a Vercel serverless function. It's a single file app without any build step and without third party dependencies. No React or any other framework is used. The data is fetched from a Torso database using built-in HTTP API.</p>
+            <p>The repository can be found <a href="https://github.com/nicnocquee/just-js">here</a>.</p>
             <h2>Users</h2>
             ${userTable}
            <form id="addUserForm" class="add-user-form">

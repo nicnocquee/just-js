@@ -143,32 +143,34 @@ export async function GET() {
             <p>This page is served from a Vercel serverless function.</p>
             <h2>Users</h2>
             ${userTable}
-            <div class="add-user-form">
-                <input type="text" id="newUserName" placeholder="Enter new user name">
-                <button onclick="addUser()">Add User</button>
-            </div>
+           <form id="addUserForm" class="add-user-form">
+                  <input type="text" id="newUserName" name="name" placeholder="Enter new user name" required>
+                  <button type="submit">Add User</button>
+              </form>
+
         </div>
-        <script>
-            async function addUser() {
-                const nameInput = document.getElementById('newUserName');
-                const name = nameInput.value.trim();
-                if (name) {
-                    const response = await fetch('/api/hello', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ name }),
-                    });
-                    if (response.ok) {
-                        nameInput.value = '';
-                        location.reload(); // Reload the page to show the updated user list
-                    } else {
-                        alert('Failed to add user');
-                    }
-                }
-            }
-        </script>
+       <script>
+              document.getElementById('addUserForm').addEventListener('submit', async function(e) {
+                  e.preventDefault();
+                  const nameInput = document.getElementById('newUserName');
+                  const name = nameInput.value.trim();
+                  if (name) {
+                      const response = await fetch('/api/hello', {
+                          method: 'POST',
+                          headers: {
+                              'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ name }),
+                      });
+                      if (response.ok) {
+                          nameInput.value = '';
+                          location.reload(); // Reload the page to show the updated user list
+                      } else {
+                          alert('Failed to add user');
+                      }
+                  }
+              });
+          </script>
     </body>
     </html>
   `;
